@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: QCWTool Plug-in
+Bundle-SymbolicName: org.stuntaz.qcwtool; singleton:=true
+Bundle-Version: 1.0
+Bundle-Activator: org.stuntaz.qcwtool.Activator
+Bundle-Localization: plugin
+Bundle-Vendor: Jon Nall
+Bundle-ClassPath: .
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+

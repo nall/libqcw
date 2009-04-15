@@ -1,0 +1,124 @@
+MAGIC: 0001
+BLOB: contains 1 WORD
+	WORD: Number of Sections
+BLOB: (Variable bytes) UNKNOWN // 3 sub-blobs in 3Charts
+	[
+		WORD	// SectionType:
+				// 1: Chart
+				// 2: Time&Sales
+				// 3: TabularBar
+				// 4: QuoteSheet ALSO OptionChain?
+				// 5: ? 
+				// 6: Browser AND Broker AND News
+				// 7: LevelII
+				// 8: HotList
+				// 9: SingleQuote
+				// 10: IslandBook
+				// 11: ?
+				// 12: OptionMontage
+				// 13: RagingBull
+		QSTRING
+	]
+BLOB: (To rest of file for 1Chart)
+	[ // RagingBull
+		BLOB // Looks a lot like Browser
+	]
+	[ // Browser
+	BLOB // Contains Current symbol & URL
+	]
+	[ // OptionsMontage
+	BLOB
+		WORD
+	BLOB
+	BLOB
+		WORD
+	BLOB
+		WORD	// Symbol length sans NULL?
+		QSTRING // Symbol name
+	BLOB UNKNOWN	// Font/style config?
+	BLOB		// QuoteData?
+	]
+	[ // Island
+	BLOB
+		WORD
+	BLOB
+	]
+	[ // LevelII
+	BLOB
+		WORD
+	BLOB UNKNOWN
+	]
+	[ // HotList
+	BLOB UNKNOWN
+	]
+	[ // OptionsChain
+	BLOB
+		WORD: 0x00C8
+	BLOB
+		WORD: 0x0001
+	BLOB [See QSO d]
+	]
+	[ // SingleQuote
+	BLOB
+		WORD
+	BLOB UNKNOWN
+	]
+	[ // TabularBar
+	BLOB
+		WORD
+		WORD
+	BLOB UNKNOWN		
+	]
+	[ // Time&Sales
+	BLOB
+		WORD
+		WORD
+	BLOB UNKNOWN
+	]
+	[ // QuoteSheetEntry
+		// Starts at offset 2 of QUO file
+		// And follows that format EXACTLY
+	BLOB:
+	]
+	[ // ChartEntry
+	BLOB: 
+		WORD 0x01
+		WORD 0x1 or 0x2, UNKNOWN
+	BLOB:
+		BLOB:
+			WORD: 0x0190 LayoutValue?
+			[ // Present when parsed from workspace file
+			WORD: 0x000D
+			QSTRING: Chart Title (NASDAQ:ISRG,8) // This is the only place time frame matters!!
+			]
+			QSTRING: ChartFont
+			DWORD: 0x5
+			DWORD: 0x1
+			DWORD: 0x0
+			WORD:  0x5	// Candle Type?
+			DWORD: 0x0
+			DWORD
+			DWORD
+			DWORD
+			DWORD
+			DWORD
+			DWORD
+			DWORD:	numberStudies
+			DWORD
+			BLOB: StudyLayout
+			BLOB: Studies
+			BLOB: CustomLines
+			BLOB: Unknown13 (0x9 bytes)
+			BLOB: DailySnapshot
+			BLOB: DataWindow
+			BLOB: Unknown14
+			
+			WORD: 0x1 length of next string
+			BYTE: 0x0 or QString: Name of QCL file
+			DWORD: 0x1
+			DWORD: 0x0 (or 1)
+			DWORD: 0x0
+			DWORD: 0x0
+			DWORD: 0x0
+	]
+			

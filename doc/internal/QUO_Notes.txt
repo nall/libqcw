@@ -1,0 +1,83 @@
+QSO File
+@ Offset 0x0000 Magic "0001"
+@ Offset 0x0002 Blob w/ length 3 containing WORD "0x00C8" Quote sheet
+@ Offset 0x000A Blob w/ length 3 containing WORD "0x0001" [UNKNOWN]
+@ Offset 0x0012 We get a blob for the rest of the file
+	@ Offset 0x0017 we get a blob for the rest of the file (possibly "1" entry (see above))
+		@Offset 0x001C QSTRING for Font
+		@Offset 0x005A 101 WORD values
+		
+		@ Offset 0x0189 we get a WORD of how many entries are in the file (7)
+
+		[ // Entry for CME
+		@ Offset 0x018C we get a WORD of name length
+		@ Offset 0x018F QSTRING of symbol name
+		@ Offset 0x019B BLOB (0x69 bytes) of data
+		]
+		[ // Entry for ICE
+		@ Offset X we get a WORD of name length
+		@ Offset X QSTRING of symbol name
+		@ Offset X BLOB (0x69 bytes) of data
+		]
+		[ // Entry for Empty Row
+		@ Offset X WORD == 0
+		]
+		[ // Entry for Total
+		@ Offset X WORD for length of QSTRING
+		@ Offset X QSTRING "Total\0"
+		@ Offset X BLOB (0x69 bytes) of data
+		]
+		[ // Entry for Subtotal
+		@ Offset X WORD of length
+		@ Offset X QSTRING of symbol name
+		@ Offset X BLOB (0x69 bytes) of data
+		]
+		[ // Entry for Divider
+		@ Offset X WORD for length
+		@ Offset X QSTRING "Subtotal\0"
+		@ Offset X BLOB which includes comment text
+		]
+		[ // Entry for NMX
+		@ Offset X WORD for length
+		@ Offset X QSTRING symbol name
+		@ Offset X BLOB (0x69 bytes) of data
+		]
+		
+		// Note a lot of the fields below are also at the bottom
+		// of the symbol-less QSL format
+		
+		@ Offset 0x0488 DWORD value == 1
+		WORD = 0x0011
+		WORD = 0x0036
+		WORD = 0x000E
+		DWORD = 0x0
+		DWORD = 0x0
+		DWORD = 0x1
+		WORD = 0x8: length of string
+		QSTRING = Name of Quote Sheet
+		BLOB = 0x86 bytes of data
+		DWORD = 0x0
+		DWORD = 0x1
+		DWORD = 0x3
+		DWORD = 0x0
+		DWORD = 0x00FFFFFF
+		DWORD = 0x00808080
+		DWORD = 0x00C0C0C0
+		DWORD = 0x0000FFFF
+		DWORD = 0x0000FF00
+		DWORD = 0x000000FF
+		DWORD = 0x0
+		DWORD = 0x0
+		DWORD = 0x00C0C0C0
+		DWORD = 0x0
+		DWORD = 0x0
+		DWORD = 0xFFFFFFFF
+		DWORD = 0xFFFFFFFF
+		DWORD = 0xFFFFFFFF
+		BLOB (length 0x19) [UNKNOWN]
+		
+		DWORD = 0x0
+		DWORD = 0x0
+		DWORD = 0x0
+		DWORD = 0xFFFFFFFF
+		

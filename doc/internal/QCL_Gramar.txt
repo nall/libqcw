@@ -1,0 +1,58 @@
+Layout :=   Chart_Font_and_Style_and_Color_Fields
+            Pane_Layout
+            [ Studies ]
+            [ Custom_Line_Group ]
+            ( 
+                Zero_Terminator
+                Pane_Layout
+                [ Studies ]
+                [ Custom_Line_Group ]
+            )*
+            Unknown_Blob
+            Unknown_Blob
+            Daily_Snapshot_Blob
+            Data_Window_Blob
+            Unknown_Blob
+
+Pane_Layout := Vertical_Perctage
+
+Studies := Number_of_Studies
+           ( Study_Type Study )*
+                
+Study := Number_of_Entries
+         ( Study_Parameter_Blob )+
+
+Custom_Line_Group := Number_of_Symbols
+                     ( Symbol_Entry )*
+
+Symbol_Entry := Name_Length
+                Name
+                Number_of_Lines
+                ( Line_Type Line_Header Line_Info )*
+                Zero_Terminator
+
+Line_Header := [ Note_Font Note_Text ]
+               Line_Note_Info
+
+Line_Info := Line_Type
+             Line_Options
+             Line_Width
+             Line_RGB
+             Start_Timestamp 
+             Start_Endpoint
+             Stop_Timestamp
+             Stop_Endpoint
+
+Zero_Terminator: 0
+
+
+NOTES:
+
+1. [] means optional, ()* means zero or more, ()+ means one or more
+2. I started using the term blob because I was seeing these large chunks of data that
+   I didn't really want to figure out how to decode yet. The term stuck and is now
+   used throughout the source.
+3. The major undecoded blobs are:
+    a. All Study Parameters
+    b. Daily Snapshot
+    c. Data Window
