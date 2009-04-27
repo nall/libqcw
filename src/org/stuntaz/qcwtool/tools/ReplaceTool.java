@@ -75,7 +75,7 @@ public final class ReplaceTool
     {
         final ReplaceDialog rd = new ReplaceDialog(getComposite().getShell());
 
-        final Map<String, String> mapping = rd.open();
+        final List<ReplaceDialog.MappingEntry> mapping = rd.open();
         final String fileName = rd.getFilename();
         final boolean removeOldSyms = rd.getRemoveOldEntries();
 
@@ -116,9 +116,10 @@ public final class ReplaceTool
                 @Override
                 public void visit(final SymbolEntryBlob oldSym)
                 {
-                    for (final String oldSymName : mapping.keySet())
+                    for (final ReplaceDialog.MappingEntry entry : mapping)
                     {
-                        final String newSymName = mapping.get(oldSymName);
+                        final String oldSymName = entry.key;
+                        final String newSymName = entry.value;
 
                         if (oldSym.getSymbolName().equals(oldSymName))
                         {

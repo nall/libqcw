@@ -59,9 +59,21 @@ import org.eclipse.swt.widgets.Text;
 public final class ReplaceDialog
     extends Dialog
 {
+    public class MappingEntry
+    {
+        public final String key;
+        public final String value;
+
+        public MappingEntry(final String key, final String value)
+        {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
     private String qcwFileName;
     private boolean removeOldEntries = false;
-    private final Map<String, String> symbolMap = new HashMap<String, String>();
+    private final List<MappingEntry> symbolMappingList = new LinkedList<MappingEntry>();
 
     /**
      * Creates a new dialog
@@ -98,7 +110,7 @@ public final class ReplaceDialog
      * 
      * @return a map of symbol name replacements
      */
-    public Map<String, String> open()
+    public List<MappingEntry> open()
     {
         final Shell parent = getParent();
         final Shell shell = new Shell(parent, SWT.DIALOG_TRIM
@@ -116,8 +128,8 @@ public final class ReplaceDialog
 
         System.out.println("open() complete");
         System.out.println("file: " + getFilename());
-        System.out.println("map entries: " + symbolMap.size());
-        return symbolMap;
+        System.out.println("map entries: " + symbolMappingList.size());
+        return symbolMappingList;
     }
 
     private void makeDialog(final Shell shell)
@@ -336,12 +348,13 @@ public final class ReplaceDialog
                     {
                         if (item.getText(0).length() > 0)
                         {
-                            symbolMap.put(item.getText(0), item.getText(1));
+                            MappingEntry entry = new MappingEntry(item.getText(0), item.getText(1));
+                            symbolMappingList.add(entry);
                         }
                     }
 
                     System.out.println("Replace selected. Map contains "
-                        + symbolMap.size() + "entries");
+                        + symbolMappingList.size() + "entries");
                     shell.dispose();
                 }
             }
