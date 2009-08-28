@@ -1,13 +1,12 @@
 List of TODOs:
-    * Stuff that will get done
+    * Stuff that ought to get done
         * Test renaming two symbols to the same symbol
           (NDX.X & NDXX -> $NDX)
-        * Write merge utility
         * Architect proper model for modifying the data structure
           as its being visited
 
-    * Stuff that will likely get done:
-        * Write dump utility
+    * Stuff that should get done:
+        * Write dump utility to dump to a text file
 
     * Stuff that might get done some day:
         * Decode chart default parameters (colors, fonts)
