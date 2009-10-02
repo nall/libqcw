@@ -47,7 +47,6 @@ public abstract class QSection
     }
 
     @Override
-    @SuppressWarnings("unused")
     public void write(final OutputStream output)
         throws IOException
     {

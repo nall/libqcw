@@ -44,7 +44,7 @@
          </property>
          <property
                name="aboutImage"
-               value="/qcwtool/icons/alt_window_32.gif">
+               value="icons/alt_window_32.gif">
          </property>
       </product>
    </extension>

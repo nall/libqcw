@@ -59,11 +59,29 @@ import org.eclipse.swt.widgets.Text;
 public final class ReplaceDialog
     extends Dialog
 {
+	/**
+	 * This class represents the mapping from one symbol to another.
+	 * @author nall
+	 *
+	 */
     public class MappingEntry
     {
+    	/**
+    	 * The key for this map entry
+    	 */
         public final String key;
+        
+        /**
+         * The value for this map entry
+         */
         public final String value;
 
+        /**
+         * Constructs a Mapping Entry from key to value
+         * 
+         * @param key
+         * @param value
+         */
         public MappingEntry(final String key, final String value)
         {
             this.key = key;
