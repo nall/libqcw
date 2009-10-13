@@ -57,6 +57,9 @@ import org.stuntaz.libqcw.defines.QTimePeriod;
 public final class BarChartBlob
     extends QRecord
 {
+	private static final int QC_MAGIC5 = 0x0190;
+	private static final int QC_MAGIC61 = 0x025B;
+	
     private QWord magic = new QWord();
     private QString chartTitle = new QString(true);
     private QByteBuffer chartFont = new QByteBuffer();
@@ -95,6 +98,16 @@ public final class BarChartBlob
     private QDword unknown18 = new QDword();
     private QDword unknown19 = new QDword();
 
+    /**
+     * Returns true if this is a QC-6.1 style chart, false otherwise
+     * 
+     * @return true if a 6.1 chart, false if earlier
+     */
+    public boolean isQC61()
+    {
+    	return magic.getValue() == QC_MAGIC61;
+    }
+    
     /**
      * Returns the study layouts for this chart
      * 
@@ -219,7 +232,7 @@ public final class BarChartBlob
 
     private void setMagic(final int magic)
     {
-        assert (magic == 0x0190);
+        assert (magic == QC_MAGIC5  || magic == QC_MAGIC61);
         this.magic = new QWord(magic);
     }
 

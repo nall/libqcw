@@ -119,11 +119,18 @@ public final class QUtils
     {
         if (QOptions.DEBUG_READ)
         {
-            System.out.println("READING "
-                + numBytes
-                + " at 0x"
+            System.out.print("READING "
+                + numBytes);
+            if(stream instanceof FileInputStream)
+            {
+            	System.out.println(" at 0x"
                 + Long.toHexString(((FileInputStream) stream).getChannel()
                     .position()));
+            }
+            else
+            {
+            	System.out.println();
+            }
         }
 
         long value = 0;

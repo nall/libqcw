@@ -207,6 +207,19 @@ public final class VerifyTool
                 new String[] { "OK" }, 0);
             md.open();
         }
+        catch(final AssertionError ass)
+        {
+        	StringBuffer buf = new StringBuffer();
+        	for(final StackTraceElement elt : ass.getStackTrace())
+        	{
+        		buf.append(elt.toString() + "\n");
+        	}
+            final MessageDialog md = new MessageDialog(getComposite()
+                    .getShell(), "Assertion Failed", null,
+                    "An assertion failed: " + buf, MessageDialog.ERROR,
+                    new String[] { "OK" }, 0);
+                md.open();        	
+        }
     }
 
     private String[][] getStatsTableEntries(final WorkspaceBlob workspace)

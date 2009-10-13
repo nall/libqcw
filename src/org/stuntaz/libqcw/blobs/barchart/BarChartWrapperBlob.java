@@ -25,7 +25,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.stuntaz.libqcw.IBarChartVisitor;
+import org.stuntaz.libqcw.blobs.QByte;
 import org.stuntaz.libqcw.blobs.QRecord;
+import org.stuntaz.libqcw.blobs.QUtils;
 
 /**
  * A thin wrapper containing the core bar chart data structure
@@ -39,6 +41,7 @@ public final class BarChartWrapperBlob
     extends QRecord
 {
     private BarChartBlob chart = new BarChartBlob();
+    private QByte unknown1 = new QByte();
 
     /**
      * Sets the bar chart for this wrapper
@@ -60,11 +63,18 @@ public final class BarChartWrapperBlob
         return this.chart;
     }
 
+    private void setUnknown1(final int value)
+    {
+        this.unknown1 = new QByte(value);
+    }
+
     @Override
     protected int getInternalSize()
     {
+    	final int extra61size = chart.isQC61() ? unknown1.getSize() : 0;    	
         // layout
-        return chart.getSize();
+    	return chart.getSize() + extra61size;
+        
     }
 
     @Override
@@ -73,6 +83,11 @@ public final class BarChartWrapperBlob
     {
         super.write(output);
         chart.write(output);
+        
+        if(chart.isQC61())
+        {
+        	unknown1.write(output);
+        }
     }
 
     public void parse(final InputStream stream)
@@ -81,6 +96,11 @@ public final class BarChartWrapperBlob
         final int size = parseRecordHeader(stream);
         setLayout(new BarChartBlob());
         getChart().parse(stream);
+        
+        if(getChart().isQC61())
+        {
+        	setUnknown1(QUtils.readQByte(stream));
+        }
 
         setValid();
 

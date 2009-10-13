@@ -107,7 +107,7 @@ public final class WorkspaceFileBlob
 
             if (magic != 0x0001)
             {
-                throw new QCWException("Unexpected magic number in header");
+                throw new QCWException("Unexpected magic number in header: " + magic);
             }
 
             setWorkspace(new WorkspaceBlob());
