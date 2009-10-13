@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="QCWTool" uid="org.stuntaz.libqcw.QCWTool" id="org.stuntaz.qcwtool.product" application="org.stuntaz.qcwtool.application" version="1.1" useFeatures="false" includeLaunchers="true">
+<product name="QCWTool" uid="org.stuntaz.libqcw.QCWTool" id="org.stuntaz.qcwtool.product" application="org.stuntaz.qcwtool.application" version="1.2" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/libqcw/icons/alt_window_32.gif"/>
